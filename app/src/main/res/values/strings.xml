@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">WhatsApp Connect</string>
+    <string name="enter_the_number_phone">Enter Number Phone</string>
+    <string name="enter_your_message_here">Enter message (Optional) </string>
+    <string name="send">Send</string>
+    <string name="waBusiness">WaBusiness</string>
+
+</resources>
