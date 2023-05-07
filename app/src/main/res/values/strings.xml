@@ -8,4 +8,10 @@
     <string name="no_wa_business_installed">No WaBusiness app Installed</string>
     <string name="usage_description">Chat directly with a WhatsApp/WaBusiness user without saving the number to your contacts.</string>
     <string name="app_notice">This app will NOT collect or store any personal data from you. It uses the official public API from WhatsApp to message users directly.</string>
+
+    <!--Update Notification-->
+    <string name="app_update_default_title">New Update Available</string>
+    <string name="app_update_default_description">Looks like you have an older version of the app</string>
+    <string name="app_update_positive_text">Update now</string>
+    <string name="app_update_cancel">Cancel</string>
 </resources>

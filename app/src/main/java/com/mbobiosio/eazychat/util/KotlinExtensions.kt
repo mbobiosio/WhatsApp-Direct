@@ -1,14 +1,20 @@
 package com.mbobiosio.eazychat.util
 
 import android.app.Activity
+import android.content.ActivityNotFoundException
 import android.content.Context
+import android.content.DialogInterface
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.content.res.Configuration
 import android.net.Uri
 import android.os.Build
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import androidx.annotation.StyleRes
 import androidx.core.content.res.ResourcesCompat
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.mbobiosio.eazychat.BuildConfig
 import com.mbobiosio.eazychat.R
 import www.sanju.motiontoast.MotionToast
 import www.sanju.motiontoast.MotionToastStyle
@@ -87,5 +93,56 @@ fun Activity.showToast(message: String, status: MotionToastStyle) {
                 font = ResourcesCompat.getFont(this, R.font.montserrat)
             )
         }
+    }
+}
+
+/*
+* Material Dialog Extension
+* */
+fun Context.alertDialog(
+    @StyleRes style: Int = 0,
+    dialogBuilder: MaterialAlertDialogBuilder.() -> Unit
+) {
+    MaterialAlertDialogBuilder(this, style)
+        .apply {
+            setCancelable(false)
+            dialogBuilder()
+            create()
+            show()
+        }
+}
+
+fun MaterialAlertDialogBuilder.negativeButton(
+    text: String? = "No",
+    onClick: (dialogInterface: DialogInterface) -> Unit = { it.dismiss() }
+) {
+    this.setNegativeButton(text) { dialogInterface, _ ->
+        onClick(dialogInterface)
+    }
+}
+
+fun MaterialAlertDialogBuilder.positiveButton(
+    text: String? = "Yes",
+    onClick: (dialogInterface: DialogInterface) -> Unit = { it.dismiss() }
+) {
+    this.setPositiveButton(text) { dialogInterface, _ ->
+        onClick(dialogInterface)
+    }
+}
+
+/*
+* Open app in playstore
+* */
+fun Activity.openAppInGooglePlay() {
+    val appId = BuildConfig.APPLICATION_ID
+    try {
+        this.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=$appId")))
+    } catch (e: ActivityNotFoundException) {
+        this.startActivity(
+            Intent(
+                Intent.ACTION_VIEW,
+                Uri.parse("https://play.google.com/store/apps/details?id=$appId")
+            )
+        )
     }
 }

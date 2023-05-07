@@ -8,7 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import com.mbobiosio.eazychat.EazyChatApp
+import com.google.firebase.analytics.FirebaseAnalytics
+import com.mbobiosio.eazychat.BuildConfig
 import com.mbobiosio.eazychat.R
 import com.mbobiosio.eazychat.data.model.RemoteConfigs
 import com.mbobiosio.eazychat.databinding.FragmentHomeBinding
@@ -17,13 +18,19 @@ import com.mbobiosio.eazychat.util.WhatsAppPackages.gbWhatsapp
 import com.mbobiosio.eazychat.util.WhatsAppPackages.whatsApp
 import com.mbobiosio.eazychat.util.WhatsAppPackages.whatsAppBusiness
 import com.mbobiosio.eazychat.util.WhatsAppPackages.yoWhatsapp
+import com.mbobiosio.eazychat.util.alertDialog
 import com.mbobiosio.eazychat.util.hideKeyboard
 import com.mbobiosio.eazychat.util.isAppInstalled
+import com.mbobiosio.eazychat.util.logEngagement
+import com.mbobiosio.eazychat.util.negativeButton
+import com.mbobiosio.eazychat.util.openAppInGooglePlay
+import com.mbobiosio.eazychat.util.positiveButton
 import com.mbobiosio.eazychat.util.showToast
 import com.mbobiosio.eazychat.util.whatsappUri
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 import www.sanju.motiontoast.MotionToastStyle
+import javax.inject.Inject
 
 /**
  * @Author Mbuodile Obiosio
@@ -36,6 +43,9 @@ class HomeFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val viewModel by viewModels<RemoteConfigViewModel>()
+
+    @Inject
+    lateinit var firebaseAnalytics: FirebaseAnalytics
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -83,10 +93,31 @@ class HomeFragment : Fragment() {
     }
 
     private fun updateUI(remoteConfigs: RemoteConfigs) {
+        val versionCode = remoteConfigs.version_code
+        val forceUpdate = remoteConfigs.force_update
+        val title = getString(R.string.app_update_default_title)
+        val description = remoteConfigs.message
         when {
-            remoteConfigs.forceUpdate -> {
-                Timber.d("App requires update : ${remoteConfigs.message}")
+            versionCode > BuildConfig.VERSION_CODE -> {
+                activity?.alertDialog(style = R.style.ThemeOverlay_App_MaterialAlertDialog) {
+                    setTitle(title)
+                    setMessage(description)
+                    setIcon(R.mipmap.ic_launcher)
+                    positiveButton(
+                        text = getString(R.string.app_update_positive_text)
+                    ) {
+                        activity?.openAppInGooglePlay()
+                    }
+                    if (forceUpdate.not()) {
+                        negativeButton(
+                            text = getString(R.string.app_update_cancel)
+                        ) {
+                            return@negativeButton
+                        }
+                    }
+                }
             }
+
             else -> {
                 Timber.d("You have the current version")
             }
@@ -111,7 +142,7 @@ class HomeFragment : Fragment() {
         intent.data = uri
         startActivity(intent)
 
-        EazyChatApp.trackSendMessageEvent(id = "send", name = "Button", type = packageName)
+        firebaseAnalytics.logEngagement(id = "send", name = "Button", type = packageName)
     }
 
     private fun whatsApp() {

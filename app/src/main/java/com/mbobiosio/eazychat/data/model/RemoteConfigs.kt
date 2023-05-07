@@ -5,6 +5,7 @@ package com.mbobiosio.eazychat.data.model
  * https://linktr.ee/mbobiosio
  */
 data class RemoteConfigs(
-    val forceUpdate: Boolean,
-    val message: String
+    val force_update: Boolean,
+    val message: String,
+    val version_code: Double
 )

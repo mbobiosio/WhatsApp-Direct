@@ -30,4 +30,9 @@
         <item name="android:fontFamily">@font/montserrat</item>
         <item name="android:statusBarColor">@color/md_theme_dark_onPrimary</item>
     </style>
+
+    <style name="ThemeOverlay.App.MaterialAlertDialog" parent="ThemeOverlay.Material3.MaterialAlertDialog">
+        <item name="alertDialogStyle">@style/MaterialAlertDialog.App</item>
+    </style>
+
 </resources>

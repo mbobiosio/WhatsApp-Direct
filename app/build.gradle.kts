@@ -4,6 +4,7 @@ plugins {
     kotlin(Plugins.KAPT)
     id(Plugins.NAVIGATION_SAFE_ARGS)
     id(Plugins.GOOGLE_SERVICES)
+    id(Plugins.CRASHLYTICS)
     id(Plugins.DAGGER_HILT)
 }
 
@@ -52,6 +53,7 @@ dependencies {
     implementation(platform("com.google.firebase:firebase-bom:32.0.0"))
     implementation("com.google.firebase:firebase-analytics-ktx")
     implementation("com.google.firebase:firebase-config-ktx")
+    implementation("com.google.firebase:firebase-crashlytics-ktx")
 
     // splash
     implementation("androidx.core:core-splashscreen:1.0.1")

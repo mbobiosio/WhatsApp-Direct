@@ -63,8 +63,9 @@ class RemoteConfigRepoImpl @Inject constructor() : RemoteConfigRepo {
 
     override fun getConfiguration(): RemoteConfigs {
         return RemoteConfigs(
-            forceUpdate = remoteConfig.getBoolean("force_update"),
-            message = remoteConfig.getString("message")
+            force_update = remoteConfig.getBoolean("force_update"),
+            message = remoteConfig.getString("message"),
+            version_code = remoteConfig.getDouble("version_code")
         )
     }
 }
