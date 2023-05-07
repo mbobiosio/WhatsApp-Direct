@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "672877157334",
+    "project_id": "eazywhatsappchat",
+    "storage_bucket": "eazywhatsappchat.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:672877157334:android:587b0aa3c8fabac9026277",
+        "android_client_info": {
+          "package_name": "com.mbobiosio.eazychat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "672877157334-u2rmm8j47bi09u790d7ds823h40hg0v9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDryWFosqHUE6qQDil6SyVYa1W2GbceqJY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "672877157334-u2rmm8j47bi09u790d7ds823h40hg0v9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
