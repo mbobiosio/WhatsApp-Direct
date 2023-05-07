@@ -1,4 +1,4 @@
-package com.mbobiosio.whatsapp
+package com.mbobiosio.eazychat
 
 import org.junit.Assert.assertEquals
 import org.junit.Test

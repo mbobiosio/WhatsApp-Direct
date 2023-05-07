@@ -1,4 +1,4 @@
-package com.mbobiosio.whatsapp.ui
+package com.mbobiosio.eazychat.ui
 
 import android.content.Intent
 import android.net.Uri
@@ -7,19 +7,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.mbobiosio.whatsapp.R
-import com.mbobiosio.whatsapp.databinding.FragmentHomeBinding
-import com.mbobiosio.whatsapp.util.WhatsAppPackages.fmWWhatsapp
-import com.mbobiosio.whatsapp.util.WhatsAppPackages.gbWhatsapp
-import com.mbobiosio.whatsapp.util.WhatsAppPackages.whatsApp
-import com.mbobiosio.whatsapp.util.WhatsAppPackages.whatsAppBusiness
-import com.mbobiosio.whatsapp.util.WhatsAppPackages.yoWhatsapp
-import com.mbobiosio.whatsapp.util.hideKeyboard
-import com.mbobiosio.whatsapp.util.isAppInstalled
-import com.mbobiosio.whatsapp.util.isValidPhone
-import com.mbobiosio.whatsapp.util.showToast
-import com.mbobiosio.whatsapp.util.textChangeListener
-import com.mbobiosio.whatsapp.util.whatsappUri
+import com.mbobiosio.eazychat.App
+import com.mbobiosio.eazychat.R
+import com.mbobiosio.eazychat.databinding.FragmentHomeBinding
+import com.mbobiosio.eazychat.util.WhatsAppPackages.fmWWhatsapp
+import com.mbobiosio.eazychat.util.WhatsAppPackages.gbWhatsapp
+import com.mbobiosio.eazychat.util.WhatsAppPackages.whatsApp
+import com.mbobiosio.eazychat.util.WhatsAppPackages.whatsAppBusiness
+import com.mbobiosio.eazychat.util.WhatsAppPackages.yoWhatsapp
+import com.mbobiosio.eazychat.util.hideKeyboard
+import com.mbobiosio.eazychat.util.isAppInstalled
+import com.mbobiosio.eazychat.util.showToast
+import com.mbobiosio.eazychat.util.whatsappUri
 import www.sanju.motiontoast.MotionToastStyle
 
 /**
@@ -60,22 +59,19 @@ class HomeFragment : Fragment() {
 
     private fun validateInputs() {
         binding.apply {
-            phoneEditText.textChangeListener(
-                afterTextChanged = {
-                    whatsAppBtn.isEnabled =
-                        it.toString().isNotEmpty() and it.toString().isValidPhone()
-                }
-            )
-            phoneEditText.textChangeListener {
-                whatsAppBusinessBtn.isEnabled =
-                    it.toString().isNotEmpty() and it.toString().isValidPhone()
+
+            countryCodePicker.registerCarrierNumberEditText(phoneEditText)
+
+            countryCodePicker.setPhoneNumberValidityChangeListener {
+                whatsAppBtn.isEnabled = it
+                whatsAppBusinessBtn.isEnabled = it
             }
         }
     }
 
     private fun getData(): Uri {
         binding.apply {
-            val countryCode = countrySelection.selectedCountryCode.toString()
+            val countryCode = countryCodePicker.selectedCountryCode.toString()
             val number = phoneEditText.text
             val phone = countryCode.plus(number)
 
@@ -90,6 +86,8 @@ class HomeFragment : Fragment() {
         intent.setPackage(packageName)
         intent.data = uri
         startActivity(intent)
+
+        App.trackSendMessageEvent(id = "send", name = "Button", type = packageName)
     }
 
     private fun whatsApp() {

@@ -1,4 +1,4 @@
-package com.mbobiosio.whatsapp.util
+package com.mbobiosio.eazychat.util
 
 /**
  * @Author Mbuodile Obiosio

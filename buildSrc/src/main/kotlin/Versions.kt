@@ -4,7 +4,7 @@
  */
 object AndroidConfig {
     const val COMPILE_SDK = 33
-    const val APPLICATION_ID = "com.mbobiosio.whatsapp"
+    const val APPLICATION_ID = "com.mbobiosio.eazychat"
     const val MIN_ANDROID_SDK = 23
     const val TARGET_ANDROID_SDK = 33
     const val VERSION_CODE = 1
@@ -30,10 +30,12 @@ object Plugins {
     const val ANDROID_LIBRARY = "com.android.library"
     const val NAVIGATION_SAFE_ARGS = "androidx.navigation.safeargs.kotlin"
     const val ANDROIDX_NAVIGATION = "androidx.navigation"
+    const val GOOGLE_SERVICES = "com.google.gms.google-services"
 }
 
 object PluginVersion {
     const val AGP = "8.0.1"
     const val KOTLIN = "1.8.21"
     const val NAVIGATION = "2.5.3"
+    const val GOOGLE_SERVICES = "4.3.15"
 }

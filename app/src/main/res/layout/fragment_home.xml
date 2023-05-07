@@ -21,14 +21,16 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.hbb20.CountryCodePicker
-        android:id="@+id/countrySelection"
+        android:id="@+id/countryCodePicker"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="@dimen/_32sdp"
         app:ccpDialog_textColor="?colorOnSurface"
         app:ccp_contentColor="?colorOnSurface"
-        app:ccp_defaultPhoneCode="234"
+        app:ccp_autoDetectLanguage="true"
+        app:ccp_rememberLastSelection="true"
+        app:ccp_autoDetectCountry="true"
         app:ccp_textSize="@dimen/_11ssp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
@@ -38,10 +40,10 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
-        app:layout_constraintBottom_toBottomOf="@+id/countrySelection"
+        app:layout_constraintBottom_toBottomOf="@+id/countryCodePicker"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/countrySelection"
-        app:layout_constraintTop_toTopOf="@+id/countrySelection">
+        app:layout_constraintStart_toEndOf="@+id/countryCodePicker"
+        app:layout_constraintTop_toTopOf="@+id/countryCodePicker">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/phoneEditText"
@@ -59,7 +61,7 @@
         app:counterEnabled="true"
         app:counterMaxLength="1000"
         app:layout_constraintEnd_toEndOf="@+id/textInputLayout"
-        app:layout_constraintStart_toStartOf="@+id/countrySelection"
+        app:layout_constraintStart_toStartOf="@+id/countryCodePicker"
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout">
 
         <com.google.android.material.textfield.TextInputEditText

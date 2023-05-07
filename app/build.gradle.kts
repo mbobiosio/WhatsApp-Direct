@@ -3,6 +3,7 @@ plugins {
     kotlin(Plugins.ANDROID)
     kotlin(Plugins.KAPT)
     id(Plugins.NAVIGATION_SAFE_ARGS)
+    id(Plugins.GOOGLE_SERVICES)
 }
 
 android {
@@ -36,7 +37,7 @@ android {
     buildFeatures {
         viewBinding = true
     }
-    namespace = "com.mbobiosio.whatsapp"
+    namespace = "com.mbobiosio.eazychat"
 }
 
 dependencies {
@@ -45,6 +46,10 @@ dependencies {
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.8.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
+
+    // Import the BoM for the Firebase platform
+    implementation(platform("com.google.firebase:firebase-bom:32.0.0"))
+    implementation("com.google.firebase:firebase-analytics-ktx")
 
     // splash
     implementation("androidx.core:core-splashscreen:1.0.1")

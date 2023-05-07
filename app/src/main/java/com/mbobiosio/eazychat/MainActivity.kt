@@ -1,9 +1,9 @@
-package com.mbobiosio.whatsapp
+package com.mbobiosio.eazychat
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import com.mbobiosio.whatsapp.databinding.ActivityMainBinding
+import com.mbobiosio.eazychat.databinding.ActivityMainBinding
 
 /**
  * @Author Mbuodile Obiosio
