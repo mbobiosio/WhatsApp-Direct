@@ -7,5 +7,7 @@ package com.mbobiosio.whatsapp.util
 object WhatsAppPackages {
     const val whatsApp = "com.whatsapp"
     const val yoWhatsapp = "com.yowhatsapp"
+    const val gbWhatsapp = "com.gbwhatsapp"
+    const val fmWWhatsapp = "com.fmwhatsapp"
     const val whatsAppBusiness = "com.whatsapp.w4b"
 }
