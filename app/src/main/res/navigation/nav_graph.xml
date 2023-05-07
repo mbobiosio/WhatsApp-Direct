@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.mbobiosio.eazychat.ui.HomeFragment"
+        android:name="com.mbobiosio.eazychat.presentation.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" />
 </navigation>

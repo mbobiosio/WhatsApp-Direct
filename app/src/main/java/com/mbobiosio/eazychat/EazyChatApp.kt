@@ -5,12 +5,15 @@ import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.analytics.ktx.analytics
 import com.google.firebase.analytics.ktx.logEvent
 import com.google.firebase.ktx.Firebase
+import dagger.hilt.android.HiltAndroidApp
+import timber.log.Timber
 
 /**
  * @Author Mbuodile Obiosio
  * https://linktr.ee/mbobiosio
  */
-class App : Application() {
+@HiltAndroidApp
+class EazyChatApp : Application() {
 
     override fun onCreate() {
         super.onCreate()
@@ -18,6 +21,12 @@ class App : Application() {
         firebaseAnalytics = Firebase.analytics
 
         trackAppOpen()
+
+        initTimber()
+    }
+
+    private fun initTimber() {
+        if (BuildConfig.DEBUG) Timber.plant(Timber.DebugTree())
     }
 
     private fun trackAppOpen() {

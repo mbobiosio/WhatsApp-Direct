@@ -4,6 +4,7 @@ plugins {
     kotlin(Plugins.KAPT)
     id(Plugins.NAVIGATION_SAFE_ARGS)
     id(Plugins.GOOGLE_SERVICES)
+    id(Plugins.DAGGER_HILT)
 }
 
 android {
@@ -50,6 +51,7 @@ dependencies {
     // Import the BoM for the Firebase platform
     implementation(platform("com.google.firebase:firebase-bom:32.0.0"))
     implementation("com.google.firebase:firebase-analytics-ktx")
+    implementation("com.google.firebase:firebase-config-ktx")
 
     // splash
     implementation("androidx.core:core-splashscreen:1.0.1")
@@ -57,6 +59,13 @@ dependencies {
     // navigation
     implementation("androidx.navigation:navigation-fragment-ktx:${PluginVersion.NAVIGATION}")
     implementation("androidx.navigation:navigation-ui-ktx:${PluginVersion.NAVIGATION}")
+
+    // Hilt
+    implementation("com.google.dagger:hilt-android:2.44")
+    kapt("com.google.dagger:hilt-compiler:2.44")
+
+    // Timber
+    implementation("com.jakewharton.timber:timber:5.0.1")
 
     implementation("com.hbb20:ccp:2.7.0")
     implementation("com.github.Spikeysanju:MotionToast:1.4")

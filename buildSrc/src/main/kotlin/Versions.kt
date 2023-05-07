@@ -31,6 +31,7 @@ object Plugins {
     const val NAVIGATION_SAFE_ARGS = "androidx.navigation.safeargs.kotlin"
     const val ANDROIDX_NAVIGATION = "androidx.navigation"
     const val GOOGLE_SERVICES = "com.google.gms.google-services"
+    const val DAGGER_HILT = "com.google.dagger.hilt.android"
 }
 
 object PluginVersion {
@@ -38,4 +39,5 @@ object PluginVersion {
     const val KOTLIN = "1.8.21"
     const val NAVIGATION = "2.5.3"
     const val GOOGLE_SERVICES = "4.3.15"
+    const val DAGGER_HILT = "2.44"
 }

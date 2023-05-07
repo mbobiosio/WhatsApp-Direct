@@ -1,4 +1,4 @@
-package com.mbobiosio.eazychat.ui
+package com.mbobiosio.eazychat.presentation
 
 import android.content.Intent
 import android.net.Uri
@@ -7,8 +7,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.mbobiosio.eazychat.App
+import androidx.fragment.app.viewModels
+import com.mbobiosio.eazychat.EazyChatApp
 import com.mbobiosio.eazychat.R
+import com.mbobiosio.eazychat.data.model.RemoteConfigs
 import com.mbobiosio.eazychat.databinding.FragmentHomeBinding
 import com.mbobiosio.eazychat.util.WhatsAppPackages.fmWWhatsapp
 import com.mbobiosio.eazychat.util.WhatsAppPackages.gbWhatsapp
@@ -19,16 +21,21 @@ import com.mbobiosio.eazychat.util.hideKeyboard
 import com.mbobiosio.eazychat.util.isAppInstalled
 import com.mbobiosio.eazychat.util.showToast
 import com.mbobiosio.eazychat.util.whatsappUri
+import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 import www.sanju.motiontoast.MotionToastStyle
 
 /**
  * @Author Mbuodile Obiosio
  * https://linktr.ee/mbobiosio
  */
+@AndroidEntryPoint
 class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
+
+    private val viewModel by viewModels<RemoteConfigViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -43,9 +50,21 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        validateInputs()
+        setupViews()
 
+        observeRemoteConfig()
+    }
+
+    private fun setupViews() {
         binding.apply {
+
+            countryCodePicker.registerCarrierNumberEditText(phoneEditText)
+
+            countryCodePicker.setPhoneNumberValidityChangeListener {
+                whatsAppBtn.isEnabled = it
+                whatsAppBusinessBtn.isEnabled = it
+            }
+
             whatsAppBtn.setOnClickListener {
                 it.hideKeyboard()
                 whatsApp()
@@ -57,14 +76,19 @@ class HomeFragment : Fragment() {
         }
     }
 
-    private fun validateInputs() {
-        binding.apply {
+    private fun observeRemoteConfig() {
+        viewModel.remoteConfigLiveData.observe(viewLifecycleOwner) {
+            updateUI(it)
+        }
+    }
 
-            countryCodePicker.registerCarrierNumberEditText(phoneEditText)
-
-            countryCodePicker.setPhoneNumberValidityChangeListener {
-                whatsAppBtn.isEnabled = it
-                whatsAppBusinessBtn.isEnabled = it
+    private fun updateUI(remoteConfigs: RemoteConfigs) {
+        when {
+            remoteConfigs.forceUpdate -> {
+                Timber.d("App requires update : ${remoteConfigs.message}")
+            }
+            else -> {
+                Timber.d("You have the current version")
             }
         }
     }
@@ -87,7 +111,7 @@ class HomeFragment : Fragment() {
         intent.data = uri
         startActivity(intent)
 
-        App.trackSendMessageEvent(id = "send", name = "Button", type = packageName)
+        EazyChatApp.trackSendMessageEvent(id = "send", name = "Button", type = packageName)
     }
 
     private fun whatsApp() {
