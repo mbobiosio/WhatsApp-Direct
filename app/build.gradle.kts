@@ -46,20 +46,17 @@ dependencies {
     implementation("com.google.android.material:material:1.8.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
 
-    implementation("com.hbb20:ccp:2.7.0")
-    implementation("com.github.Spikeysanju:MotionToast:1.4")
-
     // splash
     implementation("androidx.core:core-splashscreen:1.0.1")
-    implementation("androidx.core:core-ktx:1.10.0")
-
-    // leakcanary
-    debugImplementation("com.squareup.leakcanary:leakcanary-android:2.9.1")
-
 
     // navigation
     implementation("androidx.navigation:navigation-fragment-ktx:${PluginVersion.NAVIGATION}")
     implementation("androidx.navigation:navigation-ui-ktx:${PluginVersion.NAVIGATION}")
+
+    implementation("com.hbb20:ccp:2.7.0")
+    implementation("com.github.Spikeysanju:MotionToast:1.4")
+    implementation("com.intuit.sdp:sdp-android:1.0.6")
+    implementation("com.intuit.ssp:ssp-android:1.0.6")
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")

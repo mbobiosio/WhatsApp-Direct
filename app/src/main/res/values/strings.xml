@@ -1,8 +1,11 @@
 <resources>
-    <string name="app_name">WhatsApp Connect</string>
+    <string name="app_name">Eazy WhatsApp Chat</string>
     <string name="enter_the_number_phone">Enter Number Phone</string>
     <string name="enter_your_message_here">Enter message (Optional) </string>
     <string name="send">Send</string>
     <string name="waBusiness">WaBusiness</string>
-
+    <string name="no_whatsapp_installed">No whatsApp app installed</string>
+    <string name="no_wa_business_installed">No WaBusiness app Installed</string>
+    <string name="usage_description">Chat directly with a WhatsApp/WaBusiness user without saving the number to your contacts.</string>
+    <string name="app_notice">This app will NOT collect or store any personal data from you. It uses the official public API from WhatsApp to message users directly</string>
 </resources>

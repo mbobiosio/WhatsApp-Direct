@@ -5,6 +5,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.mbobiosio.whatsapp.databinding.ActivityMainBinding
 
+/**
+ * @Author Mbuodile Obiosio
+ * https://linktr.ee/mbobiosio
+ */
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding

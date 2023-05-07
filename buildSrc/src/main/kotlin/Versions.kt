@@ -1,8 +1,7 @@
-/*
-* Created by Mbuodile Obiosio on Nov 20, 2021.
-* Twitter: @cazewonder
-* Nigeria
-*/
+/**
+ * @Author Mbuodile Obiosio
+ * https://linktr.ee/mbobiosio
+ */
 object AndroidConfig {
     const val COMPILE_SDK = 33
     const val APPLICATION_ID = "com.mbobiosio.whatsapp"

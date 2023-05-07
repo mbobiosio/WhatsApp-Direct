@@ -6,46 +6,61 @@
     android:layout_height="match_parent"
     tools:context=".ui.HomeFragment">
 
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_16sdp"
+        android:layout_marginTop="@dimen/_60sdp"
+        android:layout_marginEnd="@dimen/_16sdp"
+        android:gravity="center"
+        android:text="@string/usage_description"
+        android:textSize="@dimen/_12ssp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <com.hbb20.CountryCodePicker
         android:id="@+id/countrySelection"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
-        android:layout_marginTop="64dp"
+        android:layout_marginTop="@dimen/_32sdp"
         app:ccpDialog_textColor="?colorOnSurface"
         app:ccp_contentColor="?colorOnSurface"
         app:ccp_defaultPhoneCode="234"
+        app:ccp_textSize="@dimen/_11ssp"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
-    <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/phoneEditText"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
-        android:background="@drawable/message_shape"
-        android:hint="@string/enter_the_number_phone"
-        android:importantForAutofill="no"
-        android:inputType="number"
-        android:padding="7dp"
-        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/countrySelection"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/countrySelection"
-        app:layout_constraintTop_toTopOf="@+id/countrySelection"
-        tools:ignore="MissingConstraints" />
+        app:layout_constraintTop_toTopOf="@+id/countrySelection">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/phoneEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/enter_the_number_phone"
+            android:inputType="number" />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/messageInputLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="32dp"
         app:counterEnabled="true"
         app:counterMaxLength="1000"
-        app:layout_constraintEnd_toEndOf="@+id/phoneEditText"
+        app:layout_constraintEnd_toEndOf="@+id/textInputLayout"
         app:layout_constraintStart_toStartOf="@+id/countrySelection"
-        app:layout_constraintTop_toBottomOf="@+id/phoneEditText">
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/messageInput"
@@ -86,5 +101,21 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/whatsAppBtn"
         app:layout_constraintTop_toTopOf="@+id/whatsAppBtn" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/textView2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:drawableLeft="@drawable/baseline_info"
+        android:drawablePadding="@dimen/_2sdp"
+        android:gravity="center"
+        android:text="@string/app_notice"
+        android:textSize="@dimen/_10ssp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/whatsAppBtn" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

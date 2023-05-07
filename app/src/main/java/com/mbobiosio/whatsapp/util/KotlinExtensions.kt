@@ -1,7 +1,5 @@
 package com.mbobiosio.whatsapp.util
 
-import android.animation.Animator
-import android.animation.AnimatorListenerAdapter
 import android.app.Activity
 import android.content.Context
 import android.content.pm.PackageManager
@@ -10,7 +8,6 @@ import android.net.Uri
 import android.os.Build
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.util.Patterns
 import android.view.View
 import android.view.inputmethod.InputMethodManager
@@ -20,7 +17,6 @@ import com.google.android.material.textfield.TextInputEditText
 import com.mbobiosio.whatsapp.R
 import www.sanju.motiontoast.MotionToast
 import www.sanju.motiontoast.MotionToastStyle
-import java.util.regex.Pattern
 
 /**
  * @Author Mbuodile Obiosio
@@ -29,47 +25,8 @@ import java.util.regex.Pattern
 fun whatsappUri(phoneNumber: String, message: String): Uri =
     Uri.parse("https://api.whatsapp.com/send?phone=$phoneNumber&text=$message")
 
-fun View.visible() {
-    this.visibility = View.VISIBLE
-}
-
-fun View.goneWithFade(duration: Long = 300) {
-    val view = this
-    with(view) {
-        animate()
-            .alpha(0f)
-            .setDuration(duration)
-            .setListener(object : AnimatorListenerAdapter() {
-                override fun onAnimationEnd(animation: Animator) {
-                    visibility = View.GONE
-                }
-            })
-    }
-}
-
-fun View.visibleWithFade(duration: Long = 300) {
-    val view = this
-    view.alpha = 0f
-    view.visible()
-    view.animate()
-        .alpha(1f)
-        .setDuration(duration)
-        .setListener(null)
-}
-
-
 fun String.isValidPhone(): Boolean =
     trimmedLength() in (10..13) && Patterns.PHONE.matcher(this).matches()
-
-/**
- * Extension method to show a keyboard for View.
- */
-fun View.showKeyboard() {
-    val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-    this.requestFocus()
-    imm.showSoftInput(this, 0)
-}
-
 
 /**
  * Try to hide the keyboard and returns whether it worked
@@ -84,18 +41,6 @@ fun View.hideKeyboard(): Boolean {
     }
     return false
 }
-
-/**
- * Extension method to get the TAG name for all object
- */
-inline val <reified T> T.TAG: String
-    get() = T::class.java.simpleName
-
-inline fun <reified T> T.logv(message: String) = Log.v(TAG, message)
-inline fun <reified T> T.logi(message: String) = Log.i(TAG, message)
-inline fun <reified T> T.logw(message: String) = Log.w(TAG, message)
-inline fun <reified T> T.logd(message: String) = Log.d(TAG, message)
-inline fun <reified T> T.loge(message: String) = Log.e(TAG, message)
 
 fun Context.isAppInstalled(packageName: String): Boolean {
     return try {
