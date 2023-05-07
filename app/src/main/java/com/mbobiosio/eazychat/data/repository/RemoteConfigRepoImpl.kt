@@ -1,7 +1,6 @@
 package com.mbobiosio.eazychat.data.repository
 
-import com.google.firebase.ktx.Firebase
-import com.google.firebase.remoteconfig.ktx.remoteConfig
+import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 import com.google.firebase.remoteconfig.ktx.remoteConfigSettings
 import com.mbobiosio.eazychat.BuildConfig
 import com.mbobiosio.eazychat.data.model.RemoteConfigs
@@ -13,10 +12,9 @@ import javax.inject.Inject
  * @Author Mbuodile Obiosio
  * https://linktr.ee/mbobiosio
  */
-class RemoteConfigRepoImpl @Inject constructor() : RemoteConfigRepo {
-
-    //Get RemoteConfig Instance
-    private val remoteConfig = Firebase.remoteConfig
+open class RemoteConfigRepoImpl @Inject constructor(
+    private val remoteConfig: FirebaseRemoteConfig
+) : RemoteConfigRepo {
 
     override fun initRemoteConfiguration() {
         /**
@@ -24,11 +22,8 @@ class RemoteConfigRepoImpl @Inject constructor() : RemoteConfigRepo {
          * Use [remoteConfigSettings] to set the minimum fetch interval
          * */
         val cacheInterval = 3000L // 3000 milliseconds Long equivalent of 3 seconds
-        val minFetchInterval: Long = if (BuildConfig.DEBUG) {
-            0
-        } else {
-            cacheInterval
-        }
+        val minFetchInterval = if (BuildConfig.DEBUG) 0L else cacheInterval
+
         val configSettings = remoteConfigSettings {
             fetchTimeoutInSeconds = 20L
             minimumFetchIntervalInSeconds = minFetchInterval
@@ -44,28 +39,28 @@ class RemoteConfigRepoImpl @Inject constructor() : RemoteConfigRepo {
             setDefaultsAsync(DefaultConfigs.getDefaultParams())
         }
         // [END default config]
+    }
 
+    override fun getConfiguration() = RemoteConfigs(
+        forceUpdate = remoteConfig.getBoolean("force_update"),
+        message = remoteConfig.getString("message"),
+        versionCode = remoteConfig.getDouble("version_code")
+    )
+
+    override fun onConfigurationUpdate() {
         /**
          * Fetch updates from Firebase console
          * */
         remoteConfig.fetchAndActivate()
-            .addOnCompleteListener {
-                if (it.isSuccessful) {
-                    Timber.d("Successful ${it.result}")
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    Timber.d("Successful with new update ${task.result}")
                 } else {
-                    Timber.d("Failed ${it.result}")
+                    Timber.d("Failed ${task.result}")
                 }
-            }.addOnFailureListener {
-                Timber.d("Exception ${it.message}")
+            }.addOnFailureListener { e ->
+                Timber.d("Exception ${e.message}")
             }
         // [End fetch and activate]
-    }
-
-    override fun getConfiguration(): RemoteConfigs {
-        return RemoteConfigs(
-            force_update = remoteConfig.getBoolean("force_update"),
-            message = remoteConfig.getString("message"),
-            version_code = remoteConfig.getDouble("version_code")
-        )
     }
 }

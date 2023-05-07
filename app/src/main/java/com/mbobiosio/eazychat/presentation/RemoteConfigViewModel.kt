@@ -1,10 +1,11 @@
 package com.mbobiosio.eazychat.presentation
 
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.mbobiosio.eazychat.data.model.RemoteConfigs
 import com.mbobiosio.eazychat.data.repository.RemoteConfigRepo
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import javax.inject.Inject
 
 /**
@@ -14,11 +15,8 @@ import javax.inject.Inject
 @HiltViewModel
 class RemoteConfigViewModel @Inject constructor(
     remoteConfigRepo: RemoteConfigRepo
-): ViewModel() {
+) : ViewModel() {
 
-    val remoteConfigLiveData = MutableLiveData<RemoteConfigs>()
-
-    init {
-        remoteConfigLiveData.value = remoteConfigRepo.getConfiguration()
-    }
+    private val _remoteConfigStateFlow = MutableStateFlow(remoteConfigRepo.getConfiguration())
+    val remoteConfigStateFlow: StateFlow<RemoteConfigs> = _remoteConfigStateFlow
 }

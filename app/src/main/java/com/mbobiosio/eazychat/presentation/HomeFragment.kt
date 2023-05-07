@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.mbobiosio.eazychat.BuildConfig
 import com.mbobiosio.eazychat.R
@@ -87,14 +88,16 @@ class HomeFragment : Fragment() {
     }
 
     private fun observeRemoteConfig() {
-        viewModel.remoteConfigLiveData.observe(viewLifecycleOwner) {
-            updateUI(it)
+        lifecycleScope.launchWhenStarted {
+            viewModel.remoteConfigStateFlow.collect {
+                updateUI(it)
+            }
         }
     }
 
     private fun updateUI(remoteConfigs: RemoteConfigs) {
-        val versionCode = remoteConfigs.version_code
-        val forceUpdate = remoteConfigs.force_update
+        val versionCode = remoteConfigs.versionCode
+        val forceUpdate = remoteConfigs.forceUpdate
         val title = getString(R.string.app_update_default_title)
         val description = remoteConfigs.message
         when {

@@ -1,6 +1,7 @@
 package com.mbobiosio.eazychat
 
 import android.app.Application
+import android.content.Context
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.mbobiosio.eazychat.util.logAppInstance
 import dagger.hilt.android.HiltAndroidApp
@@ -27,5 +28,9 @@ class EazyChatApp : Application() {
 
     private fun initTimber() {
         if (BuildConfig.DEBUG) Timber.plant(Timber.DebugTree())
+    }
+
+    override fun attachBaseContext(base: Context?) {
+        super.attachBaseContext(base)
     }
 }
