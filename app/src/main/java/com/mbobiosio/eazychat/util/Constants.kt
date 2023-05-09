@@ -4,6 +4,8 @@ package com.mbobiosio.eazychat.util
  * @Author Mbuodile Obiosio
  * https://linktr.ee/mbobiosio
  */
+const val CACHE_INTERVAL = 3000L
+
 object WhatsAppPackages {
     const val whatsApp = "com.whatsapp"
     const val yoWhatsapp = "com.yowhatsapp"

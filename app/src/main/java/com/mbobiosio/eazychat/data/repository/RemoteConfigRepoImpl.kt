@@ -4,6 +4,7 @@ import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 import com.google.firebase.remoteconfig.ktx.remoteConfigSettings
 import com.mbobiosio.eazychat.BuildConfig
 import com.mbobiosio.eazychat.data.model.RemoteConfigs
+import com.mbobiosio.eazychat.util.CACHE_INTERVAL
 import com.mbobiosio.eazychat.util.DefaultConfigs
 import timber.log.Timber
 import javax.inject.Inject
@@ -21,12 +22,10 @@ open class RemoteConfigRepoImpl @Inject constructor(
          * [cacheInterval] defines the interval of fetches per hour.
          * Use [remoteConfigSettings] to set the minimum fetch interval
          * */
-        val cacheInterval = 3000L // 3000 milliseconds Long equivalent of 3 seconds
-        val minFetchInterval = if (BuildConfig.DEBUG) 0L else cacheInterval
 
         val configSettings = remoteConfigSettings {
             fetchTimeoutInSeconds = 20L
-            minimumFetchIntervalInSeconds = minFetchInterval
+            minimumFetchIntervalInSeconds = if (BuildConfig.DEBUG) 0L else CACHE_INTERVAL
         }
         // [END config settings]
 

@@ -29,7 +29,6 @@ import com.mbobiosio.eazychat.util.positiveButton
 import com.mbobiosio.eazychat.util.showToast
 import com.mbobiosio.eazychat.util.whatsappUri
 import dagger.hilt.android.AndroidEntryPoint
-import timber.log.Timber
 import www.sanju.motiontoast.MotionToastStyle
 import javax.inject.Inject
 
@@ -122,7 +121,7 @@ class HomeFragment : Fragment() {
             }
 
             else -> {
-                Timber.d("You have the current version")
+                //Timber.d("You have the current version")
             }
         }
     }

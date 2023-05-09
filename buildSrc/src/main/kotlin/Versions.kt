@@ -7,7 +7,7 @@ object AndroidConfig {
     const val APPLICATION_ID = "com.mbobiosio.eazychat"
     const val MIN_ANDROID_SDK = 23
     const val TARGET_ANDROID_SDK = 33
-    const val VERSION_CODE = 1
+    const val VERSION_CODE = 4
     const val TEST_INSTRUMENTATION_RUNNER = "androidx.test.runner.AndroidJUnitRunner"
 
     val versionName by lazy {
