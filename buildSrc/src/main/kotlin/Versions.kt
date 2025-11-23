@@ -3,10 +3,10 @@
  * https://linktr.ee/mbobiosio
  */
 object AndroidConfig {
-    const val COMPILE_SDK = 33
+    const val COMPILE_SDK = 34
     const val APPLICATION_ID = "com.mbobiosio.eazychat"
     const val MIN_ANDROID_SDK = 23
-    const val TARGET_ANDROID_SDK = 33
+    const val TARGET_ANDROID_SDK = 34
     const val VERSION_CODE = 4
     const val TEST_INSTRUMENTATION_RUNNER = "androidx.test.runner.AndroidJUnitRunner"
 
@@ -36,10 +36,10 @@ object Plugins {
 }
 
 object PluginVersion {
-    const val AGP = "8.0.1"
-    const val KOTLIN = "1.8.21"
-    const val NAVIGATION = "2.5.3"
-    const val GOOGLE_SERVICES = "4.3.15"
-    const val CRASHLYTICS = "2.9.5"
-    const val DAGGER_HILT = "2.44"
+    const val AGP = "8.5.2"
+    const val KOTLIN = "1.9.25"
+    const val NAVIGATION = "2.8.5"
+    const val GOOGLE_SERVICES = "4.4.2"
+    const val CRASHLYTICS = "3.0.2"
+    const val DAGGER_HILT = "2.51.1"
 }
